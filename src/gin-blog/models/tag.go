@@ -12,6 +12,9 @@ type Tag struct {
 	ModifiedBy string `json:"modified_by"`
 	State int `json:"state"` //'状态 0为禁用、1为启用'
 }
+
+
+
 func GetTags(pageNum int,pageSize int,maps interface {})(tags []Tag){
 	db.Where(maps).Offset(pageNum).Limit(pageSize).Find(&tags)
 	return
