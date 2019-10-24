@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/gorm" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/astaxie/beego" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/gin-contrib/sse" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/gin-gonic/gin" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/go-ini/ini" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/go-martini/martini" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/go-playground/locales" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/go-playground/universal-translator" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/golang/protobuf" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/hyper-carrot/go_lib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/jinzhu/gorm" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/jinzhu/inflection" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/kardianos/govendor" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/leodido/go-urn" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/mattn/go-isatty" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/mattn/go-sqlite3" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/mysql/mysql" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/github.com/ugorji/go" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/golang.org/x/net" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/golang.org/x/sys" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/golang.org/x/tools" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/gopkg.in/go-playground/validator.v9" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/gopkg.in/yaml.v2" vcs="Git" />
+  </component>
+</project>
