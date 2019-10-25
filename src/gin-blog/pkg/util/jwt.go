@@ -32,18 +32,16 @@ func  GenerateToken(username string ,password string)(string, error){
 }
 
 func ParseToken(token string) (*MyCustomClaims, error){ //解析token
+	//相关参数:1.获取的token,2,定义的token想关结构体 3.将接收解析的令牌，并返回密钥进行验证
 	tokenClaims, err := jwt.ParseWithClaims(token, &MyCustomClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return jwtSecret, nil
 	})
-
 	if tokenClaims != nil {
 		if claims, ok := tokenClaims.Claims.(*MyCustomClaims); ok && tokenClaims.Valid {
 			return claims, nil
 		}
 	}
-
 	return nil, err
-
 }
 
 
