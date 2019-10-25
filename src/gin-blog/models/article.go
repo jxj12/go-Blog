@@ -10,7 +10,6 @@ type Article struct {
 
 	TagID int `json:"tag_id" gorm:"index"`
 	Tag   Tag `json:"tag"` //文章属于标签,相互关联
-
 	Title string `json:"title"`
 	Desc string `json:"desc"`
 	Content string `json:"content"`
@@ -40,8 +39,9 @@ func GetArticleBYid(id int)bool{
 }
 //关联表查找要记得关联
 func GetArticle(id int) (articles Article) {
-	db.Where("id=?", id).First(&articles) //查找数据是否存在
-	db.Model(&articles).Related(&articles.Tag) //articles 属于Tag
+	db.Where("id=?", id).Preload("Tag").First(&articles) //查找数据是否存在
+	//db.Where("id=?", id).First(&articles)
+	//db.Model(&articles).Related(&articles.Tag) //articles 属于Tag
 	return
 }
 
@@ -49,7 +49,11 @@ func GetArticlelist(pageNum int,pageSize int,maps interface {})(article []Articl
 	db.Preload("Tag").Where(maps).Offset(pageNum).Limit(pageSize).Find(&article)
 	return
 }
+func GetArticleTotal(maps interface {}) (count int){
+	db.Model(&Article{}).Where(maps).Count(&count)
 
+	return
+}
 func AddArticlelist(maps map[string]interface{})bool{
 	db.Create(&Article{
 		TagID:      maps["tag_id"].(int),

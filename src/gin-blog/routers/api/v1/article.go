@@ -3,6 +3,8 @@ package v1
 import (
 	"../../../models"
 	"../../../pkg/e"
+	"../../../pkg/util"
+	"../../../pkg/setting"
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -12,7 +14,7 @@ import (
 
 //获取单个文章
 func GetArticle(c *gin.Context) {
-	b,_ := strconv.Atoi(c.Query("id"))
+	b,_ := strconv.Atoi(c.Param("id"))
 	id :=b
 	valid := validation.Validation{}
 	valid.Required(id, "id").Message("名称不能为空")
@@ -35,6 +37,26 @@ func GetArticle(c *gin.Context) {
 
 //获取多个文章
 func GetArticles(c *gin.Context) {
+	data :=make(map[string]interface{})
+	maps :=make(map[string]interface{})
+	id,_:=strconv.Atoi(c.Query("tag_id"))
+	s ,_:= strconv.Atoi(c.Query("state"))
+	state:=s
+	tagId :=id
+	valid:=	validation.Validation{}
+	valid.Min(tagId, 1, "tag_id").Message("标签ID必须大于0")
+	valid.Range(state, 0, 1, "state").Message("状态只允许0或1")
+	code :=e.INVALID_PARAMS
+	if !valid.HasErrors(){
+		code =e.SUCCESS
+		data["list"]=models.GetArticlelist(util.GetPage(c),setting.PageSize,maps)
+		data["Total"]=models.GetArticleTotal(maps)
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"code" : code,
+		"msg" : e.Getmsg(code),
+		"data" : data,
+	})
 
 }
 
