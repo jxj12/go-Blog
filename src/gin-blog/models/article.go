@@ -38,14 +38,36 @@ func GetArticleBYid(id int)bool{
 	}
 	return false
 }
-
+//关联表查找要记得关联
 func GetArticle(id int) (articles Article) {
 	db.Where("id=?", id).First(&articles) //查找数据是否存在
-	db.Model(&articles).Related(&articles.Tag)
+	db.Model(&articles).Related(&articles.Tag) //articles 属于Tag
 	return
 }
 
 func GetArticlelist(pageNum int,pageSize int,maps interface {})(article []Article){
 	db.Preload("Tag").Where(maps).Offset(pageNum).Limit(pageSize).Find(&article)
 	return
+}
+
+func AddArticlelist(maps map[string]interface{})bool{
+	db.Create(&Article{
+		TagID:      maps["tag_id"].(int),
+		Title:      maps["title"].(string),
+		Desc:       maps["desc"].(string),
+		Content:    maps["content"].(string),
+		CreatedBy:  maps["created_by"].(string),
+		State:      maps["state"].(int),
+	})
+	return true
+}
+
+
+func EditArticle(id int,data interface{})bool{
+	db.Model(&Article{}).Where("id= ?", id).Update(data)
+	return true
+}
+func DeleatArticle(id int)bool{
+	db.Where("id= ?", id).Delete(&Article{})
+	return true
 }

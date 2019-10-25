@@ -27,27 +27,26 @@ func GetTagsToal(maps interface{})(count int){
 }
 
 func ExistTagByName(name string)bool{
-	var tags Tag
-	db.Select("id").Where("name=?",name).First(&tags) //查找数据是否存在
-	if tags.ID >0{
+	var tag Tag
+	db.Select("id").Where("name=?",name).First(&tag) //查找数据是否存在
+	if tag.ID >0{
 		return true
 	}
 	return false
 }
 
-func AddTag(name string,state int,createdby string)bool{
+func AddTag(name string,state int,createdBy string)bool{
 	//如果不存在就添加
 	db.Create(&Tag{
 		Name:       name,
-		CreatedBy:  createdby,
+		CreatedBy:  createdBy,
 		State:      state,
 	})
 	return true
 }
 
-
 func (tag *Tag) BeforeCreate(scope *gorm.Scope) error {
-	scope.SetColumn("CreatedOn", time.Now().Unix())
+	scope.SetColumn("CreatedOn", time.Now().Unix()) //设置列的值
 	return nil
 }
 
