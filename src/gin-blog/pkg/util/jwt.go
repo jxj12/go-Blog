@@ -7,14 +7,14 @@ import (
 	"time"
 )
 
-var jwtSecret = []byte(setting.JwtSecret)
+var jwtSecret = []byte(setting.JwtSecret)//密钥
 type MyCustomClaims struct {
 	username string `json:"username"`
 	password string `json:"password"`
 	jwt.StandardClaims
 }
 
-func  GenerateToken(username string ,password string)(string, error){
+func GenerateToken(username string ,password string)(string, error){
 	nowTime := time.Now()
 	expireTime := nowTime.Add(3 * time.Hour)
 	claims := MyCustomClaims{
@@ -26,7 +26,7 @@ func  GenerateToken(username string ,password string)(string, error){
 		},
 	}
 	tokenClaims := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	token, err := tokenClaims.SignedString(jwtSecret)//获取完整的签名令牌
+	token, err := tokenClaims.SignedString(jwtSecret)//使用密钥,获取完整的签名令牌.
 	fmt.Printf("%v %v", token , err)
 	return token,err
 }
