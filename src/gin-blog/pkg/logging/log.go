@@ -1,11 +1,11 @@
 package logging
 
 import (
-"log"
-"os"
-"runtime"
-"path/filepath"
-"fmt"
+	"fmt"
+	"log"
+	"os"
+	"path/filepath"
+	"runtime"
 )
 
 type Level int
@@ -29,11 +29,16 @@ const (
 	FATAL
 )
 
-func init() {
+func Setup() {
+	var err error
 	filePath := getLogFileFullPath()
-	F = openLogFile(filePath)
+	fileName := getLogFileName()
+	F, err = openLogFile(fileName, filePath)
+	if err != nil {
+		log.Fatalf("logging.Setup err: %v", err)
+	}
 
-	logger = log.New(F, DefaultPrefix, log.LstdFlags)//创建一个新的日志记录器
+	logger = log.New(F, DefaultPrefix, log.LstdFlags)
 }
 
 func Debug(v ...interface{}) {

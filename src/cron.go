@@ -6,8 +6,10 @@ import (
 	"time"
 
 	//"log"
-	"github.com/EDDYCJY/go-gin-example/models"
+	//"github.com/EDDYCJY/go-gin-example/models"
+	"./gin-blog/models"
 	//"time"
+	//"fmt"
 )
 
 //定时操作
@@ -20,7 +22,8 @@ func main(){
 //如果按月执行等，和修改spec
 	c.AddFunc("*/5*****", func() {
 		fmt.Println("Run models.CleanAllTag...")
-		models.CleanAllTag()
+		//models.CleanAllTag()
+		models.ClentAllTage()
 		fmt.Println("44444444444")
 	})
 	c.AddFunc("*/15*****", func() {

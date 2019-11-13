@@ -14,7 +14,7 @@ func InitRouter() *gin.Engine{
  	r.Use(gin.Recovery())
  	//r.Use(jwt.Jwt())
 
- 	gin.SetMode(setting.RunMode)//SetMode根据输入字符串设置gin模式
+ 	gin.SetMode(setting.ServerSetting.RunMode)//SetMode根据输入字符串设置gin模式
 	r.GET("/auth",api.GetAuth)
  	apiv1 :=r.Group("/api/v1")  //路由分组
 	apiv1.Use(jwt.Jwt())

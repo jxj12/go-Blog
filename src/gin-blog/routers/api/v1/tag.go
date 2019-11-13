@@ -33,7 +33,7 @@ func GetTags(c *gin.Context) {
 		state = a
 		maps["state"]=state
 	}
-	data["list"] = models.GetTags(util.GetPage(c),setting.PageSize,maps)
+	data["list"] = models.GetTags(util.GetPage(c),setting.AppSetting.PageSize,maps)
 	data["total"] =models.GetTagsToal(maps)
 	code :=e.SUCCESS
 	c.JSON(http.StatusOK,gin.H{

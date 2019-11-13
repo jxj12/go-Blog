@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-var jwtSecret = []byte(setting.JwtSecret)//密钥
+var jwtSecret = []byte(setting.AppSetting.JwtSecret)//密钥
 type MyCustomClaims struct {
 	username string `json:"username"`
 	password string `json:"password"`

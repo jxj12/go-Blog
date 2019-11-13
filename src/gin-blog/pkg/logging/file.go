@@ -1,8 +1,9 @@
 package logging
 
 import (
+	"../setting"
 	"fmt"
-	"log"
+	"gin-blog/pkg/file"
 	"os"
 	"time"
 )
@@ -24,7 +25,7 @@ func getLogFileFullPath() string {
 
 	return fmt.Sprintf("%s%s", prefixPath, suffixPath)
 }
-
+/*
 func openLogFile(filePath string) *os.File {
 	_, err := os.Stat(filePath)
 	switch {
@@ -48,4 +49,38 @@ func mkDir() {
 	if err != nil {
 		panic(err)
 	}
+}*/
+
+func openLogFile(fileName,filePath string)(*os.File,error){
+	dir, err := os.Getwd()//获取当前文件路径
+	if err !=nil{
+		return nil,err
+	}
+	src :=dir +"/"+filePath
+	perm :=file.CheckPermission(src)
+	if perm ==true{
+		return nil ,err
+	}
+	err =file.IsNotExistMkDir(src)
+	if err !=nil{
+		return nil,err
+	}
+	f,err:=file.Open(src+fileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err!=nil{
+		return nil,err
+	}
+	return f,nil
+
+
+
+
+}
+
+
+func getLogFileName() string {
+	return fmt.Sprintf("%s%s.%s",
+		setting.AppSetting.LogSaveName,
+		time.Now().Format(setting.AppSetting.TimeFormat),
+		setting.AppSetting.LogFileExt,
+	)
 }
