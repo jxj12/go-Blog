@@ -74,3 +74,8 @@ func DeleatTag(id int)bool{
 	db.Where("id= ?", id).Delete(&Tag{})
 	return true
 }
+
+func ClentAllTage()bool{
+	db.Unscoped().Where("deleted_on != ? ", 0).Delete(&Tag{})
+	return true
+}

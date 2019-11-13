@@ -3,7 +3,7 @@ package jwt
 import (
 	"../../pkg/e"
 	"../../pkg/util"
-	"github.com/dgrijalva/jwt-go"
+	"github.com/jwt-go"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
