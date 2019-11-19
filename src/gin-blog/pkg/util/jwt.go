@@ -2,9 +2,12 @@ package util
 
 import (
 	"fmt"
-	"../setting"
+	"github.com/dgdgrijalva/jwt-go"
+
+	//"../setting"
+	"gin-blog/pkg/setting"
 	//"github.com/dgrijalva/jwt-go"
-	"github.com/jwt-go"
+	//"github.com/jwt-go"
 	"time"
 )
 

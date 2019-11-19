@@ -44,6 +44,16 @@ type Database struct {
 
 var DatabaseSetting = &Database{}
 
+type Redisbase struct{
+	MaxIdle  int
+	MaxActive int
+	IdleTimeout time.Duration
+	Host string
+	Password string
+
+}
+var RdisSetting = &Redisbase{}
+
 func Setup() {
 	Cfg, err := ini.Load("gin-blog/conf/conf.ini")
 	if err != nil {
@@ -69,4 +79,9 @@ func Setup() {
 	if err != nil {
 		log.Fatalf("Cfg.MapTo DatabaseSetting err: %v", err)
 	}
+	err = Cfg.Section("redis").MapTo(RdisSetting)
+	if err !=nil{
+		log.Fatalf("cfg.mapto redissetting err:%v",err)
+	}
+
 }

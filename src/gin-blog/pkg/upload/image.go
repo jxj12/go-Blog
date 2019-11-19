@@ -1,7 +1,8 @@
 package upload
 
 import (
-	"../setting"
+	//"../setting"
+	"gin-blog/pkg/setting"
 	"fmt"
 	"gin-blog/pkg/logging"
 	"gin-blog/pkg/util"
@@ -10,7 +11,9 @@ import (
 	"os"
 	"path"
 	"strings"
-	"../file"
+	//"../file"
+	"gin-blog/pkg/file"
+
 )
 
 //获取图片完整访问URL

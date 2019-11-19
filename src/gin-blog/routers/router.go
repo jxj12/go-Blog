@@ -4,8 +4,10 @@ import (
 	"../pkg/setting"
 	v1 "./api/v1"
 	"../routers/api"
+	"../pkg/upload"
 	"github.com/gin-gonic/gin"
 	"../middleware/jwt"
+	"net/http"
 )
 
 func InitRouter() *gin.Engine{
@@ -15,7 +17,10 @@ func InitRouter() *gin.Engine{
  	//r.Use(jwt.Jwt())
 
  	gin.SetMode(setting.ServerSetting.RunMode)//SetMode根据输入字符串设置gin模式
-	r.GET("/auth",api.GetAuth)
+	r.StaticFS("/upload/images", http.Dir(upload.GetImageFullPath()))
+ 	r.GET("/auth",api.GetAuth)
+	r.POST("/upload", api.UploadImage)
+
  	apiv1 :=r.Group("/api/v1")  //路由分组
 	apiv1.Use(jwt.Jwt())
  	{
@@ -37,4 +42,5 @@ func InitRouter() *gin.Engine{
 		apiv1.DELETE("/articles/:id", v1.DeleteArticle)
 	}
  	return r //返回引擎
+
 }

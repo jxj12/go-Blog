@@ -1,7 +1,8 @@
 package logging
 
 import (
-	"../setting"
+	//"../setting"
+	"gin-blog/pkg/setting"
 	"fmt"
 	"gin-blog/pkg/file"
 	"os"
